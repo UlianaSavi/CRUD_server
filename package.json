@@ -1,0 +1,19 @@
+{
+  "name": "crud-server",
+  "version": "1.0.0",
+  "description": "Simple CRUD server for rs school",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "type": "module",
+  "repository": {
+    "url": "https://github.com/UlianaSavi/CRUD_server"
+  },
+  "author": "Uliana Savitskaya",
+  "license": "ISC",
+  "homepage": "https://github.com/UlianaSavi/CRUD_server",
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  }
+}
