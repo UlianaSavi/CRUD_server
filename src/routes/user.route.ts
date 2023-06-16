@@ -1,6 +1,8 @@
 import { ROUTES } from "../constants";
 import { IncomingMessage, ServerResponse } from 'http';
-import * as Database from '../db/db';
+import { Database } from "../db/db";
+
+const db = new Database();
 
 export class UserRouter {
     public static route = (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
@@ -8,19 +10,19 @@ export class UserRouter {
         
         switch (method) {
             case ROUTES.GET_USERS:
-                const data = Database.getAll();
+                const data = db.getAll();
                 break;
             case ROUTES.GET_USERBYID:
-                Database.getUserById();
+                db.getUserById();
                 break;
             case ROUTES.CREATE_USER && method === 'POST':
-                Database.createNewUser();
+                db.createNewUser();
                 break;
             case ROUTES.UPDATE_USER && method === 'PUT':
-                Database.updateUser();
+                db.updateUser();
                 break;
             case ROUTES.DELETE_USER && method === 'DELETE ':
-                Database.deleteUser();
+                db.deleteUser();
                 break;
         }
     };
