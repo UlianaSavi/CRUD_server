@@ -7,6 +7,7 @@ export const processReq = (req: IncomingMessage, res: ServerResponse<IncomingMes
         const chunks: Buffer[] = [];
         let body = '';
         let reqWithBody: IRequestWithBody = { req: req, body: '' };
+
         req.on('data', (chunk: Buffer, err: Error) => {
             if (err) {
                 res.statusCode = 404;
@@ -18,10 +19,15 @@ export const processReq = (req: IncomingMessage, res: ServerResponse<IncomingMes
         });
 
         req.on('end', () => {
-            const data: IUser = JSON.parse(Buffer.concat(chunks).toString());
-            body = JSON.stringify(data);
-            reqWithBody.body = body;
-            resolve(reqWithBody);
-                });
+            try {
+                const data: IUser = JSON.parse(Buffer.concat(chunks).toString());
+                body = JSON.stringify(data);
+                reqWithBody.body = body;
+                resolve(reqWithBody);
+            } catch (error) {
+                reqWithBody.body = null;
+                resolve(reqWithBody);
+            }
         });
+    });
   }

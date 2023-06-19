@@ -10,10 +10,16 @@ export class UserService {
     res: ServerResponse<IncomingMessage> ;
 
     constructor(reqWithBody: IRequestWithBody, res: ServerResponse<IncomingMessage> ) {
-        this.user = JSON.parse(reqWithBody.body) || null;
+        this.user = null;
         this.id = reqWithBody.req?.url && reqWithBody.req?.url?.length > 11  ? reqWithBody.req?.url?.slice(11) : null;
         this.req = reqWithBody;
         this.res = res;
+
+        if(this.req.body) {
+            this.user = JSON.parse(this.req.body); 
+        } else {
+            this.user = null;
+        }
     }
 
     getAll = () => {
