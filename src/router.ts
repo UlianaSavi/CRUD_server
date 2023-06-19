@@ -13,7 +13,11 @@ export class Router {
         switch (url) {
             case BASE +'/users':
                 return UserRouter.route(reqWithBody, res);
-            }
-        return null;
+        
+            default:
+                res.statusCode = 404;
+                res.end(`By route ${ reqWithBody.req.url } nothing in server not found!`)
+                break;
+        }
     }
 }
