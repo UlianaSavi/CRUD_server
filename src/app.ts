@@ -10,7 +10,6 @@ const port = process.env.SERVER_PORT ? +process.env.SERVER_PORT : 3000;
 
 const server = http.createServer(async (req, res) => {
   const reqWithBody = await processReq(req, res);
-  console.log('reqWithBody: ', reqWithBody?.body);
   
   Router.route(reqWithBody, res);
 });

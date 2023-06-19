@@ -27,19 +27,28 @@ class Database {
     };
     
     public createNewUser = (user: IUser) => {
-        const res = [...this.users, user];
-        this.users = res;
-    };
-    
-    public updateUser = (id: string, user: IUser) => {
-        const userToUpdate = this.users.findIndex((user) => id === user.id) || null;
-        if (userToUpdate) {
-            this.users[userToUpdate] = user;
+        if(this.users.some((userInDb) => userInDb.id === user.id)) {
+            return false;
         } else {
-            return null;
+            const res = [...this.users, user];
+            this.users = res;
+            return true;
         }
     };
     
+    public updateUser = (id: string, user: IUser) => {
+        const userToUpdate = this.users.findIndex((userInArr) => userInArr.id === id);
+        
+        if (userToUpdate >= 0) {
+            this.users[userToUpdate].username = user.username;
+            this.users[userToUpdate].age = user.age;
+            this.users[userToUpdate].hobbies = user.hobbies;
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     public deleteUser = (id: string) => {
         this.users.filter((user) => id !== user.id);
     };

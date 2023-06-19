@@ -28,7 +28,7 @@ export class UserService {
         this.res.end(JSON.stringify(data));
     };
 
-    getUserById = () => {
+    getUserById = () => {        
         if (this.id) {
             const data = db.getUserById(this.id);
             if (data) {
@@ -36,24 +36,37 @@ export class UserService {
                 this.res.end(JSON.stringify(data));
             } else {
                 this.res.statusCode = 404;
+                this.res.end(`Wrong id. User with ${ this.id } does not exist!`)
             }
         }
     };
 
     createNewUser = () => {
         if (this.user) {
-            console.log('user: ', this.user);
-            db.createNewUser(this.user)
-            this.res.statusCode = 200;
-            this.res.end(`New user with id ${ this.user.id } created!`);
+            const res = db.createNewUser(this.user);
+            if (res) {
+                this.res.statusCode = 200;
+                this.res.end(`New user with id ${ this.id } created!`);
+            } else {
+                this.res.statusCode = 404;
+                this.res.end('User with this id already exist!')
+            }
         } else {
-            this.res.statusCode = 404;
+            this.res.statusCode = 400;
+            this.res.end('Request body does not contain required fields!')
         }
     };
 
     updateUser = () => {
         if (this.id && this.user) {
-            db.updateUser(this.id, this.user);
+            const res = db.updateUser(this.id, this.user);
+            if (res) {
+                this.res.statusCode = 200;
+                this.res.end(`User with id ${ this.id } updated!`)
+            } else {
+                this.res.statusCode = 404; 
+                this.res.end(`User with id ${ this.id } does not exist!`)
+            }
         }
     };
 
