@@ -72,11 +72,14 @@ export class UserService {
 
     deleteUser = () => {
         if (this.id) {
-            db.deleteUser(this.id)
-            this.res.statusCode = 200;
-            this.res.end(`User with id ${ this.id } deleted!`);
-        } else {
-            this.res.statusCode = 404;
+            const res = db.deleteUser(this.id)
+            if (res) {
+                this.res.statusCode = 204;
+                this.res.end(`User with id ${ this.id } deleted!`);
+            } else {
+                this.res.statusCode = 404;
+                this.res.end(`User with id ${ this.id } not found!`);
+            }
         }
     };
 }

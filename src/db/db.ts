@@ -50,7 +50,14 @@ class Database {
     };
 
     public deleteUser = (id: string) => {
-        this.users.filter((user) => id !== user.id);
+        if (this.users.some((userInDb) => userInDb.id === id)) {
+            const res = this.users.filter((user) => id !== user.id);
+            this.users = res;
+            return true;
+        } else {
+            return false;
+        }
+        
     };
 };
 

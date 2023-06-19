@@ -18,6 +18,4 @@ server.listen(port, hostname, () => {
   console.log(`Server running at http://${ hostname }:${ port }/`);
 });
 
-server.on('request', () => console.log('Get request!'))
-
 server.on('error', (err: Error) => console.log(`Operation failed!\n${ err.message }`));
