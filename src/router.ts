@@ -1,17 +1,18 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { UserRouter } from './routes/user.route';
+import { BASE } from './constants';
+import { IRequestWithBody } from './models/requestWithBody';
 
 export class Router {
-    private static BASE = 'api';
 
     constructor() {}
 
-    public static route = (req: IncomingMessage, res: ServerResponse<IncomingMessage>) => {
-        const route = Router.BASE + req?.url || '';
+    public static route = (reqWithBody: IRequestWithBody, res: ServerResponse<IncomingMessage>) => {
+        const url = reqWithBody.req?.url?.match('/api/users')?.at(0);
 
-        switch (route) {
-            case 'user':
-                return UserRouter.route(req, res);
+        switch (url) {
+            case BASE +'/users':
+                return UserRouter.route(reqWithBody, res);
             }
         return null;
     }
