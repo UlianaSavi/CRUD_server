@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon src/app.ts",
     "start:dev": "cross-env NODE_ENV=development nodemon src/app.ts",
-    "start:prod": "webpack build && cross-env NODE_ENV=production nodemon --watch build node --exec dist/bundle.js"
+    "start:prod": "webpack build && cross-env NODE_ENV=production nodemon --watch build node --exec dist/bundle.js",
+    "start:multi": "cross-env NODE_ENV=multi nodemon src/app.ts"
   },
   "type": "module",
   "repository": {
