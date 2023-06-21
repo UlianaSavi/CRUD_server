@@ -6,13 +6,13 @@ class Database {
     constructor() {
         this.users = [
             {
-                id: '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed',
+                id: '123e4567-e89b-12d3-a456-426655440000',
                 username: 'Bladimir',
                 age: 17,
                 hobbies: []
             },
             {
-                id: '2b9d2bfd-bbfd-4b2d-9b5d-ab8dfbbd4bbd',
+                id: 'c73bcdcc-2669-4bf6-81d3-e4ae73fb11fd',
                 username: 'Evgenii',
                 age: 24,
                 hobbies: []
