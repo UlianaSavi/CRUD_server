@@ -5,7 +5,6 @@ import { startCluster } from './cluster';
 import { processReq } from './utils/processReq';
 import { HOSTNAME } from './constants';
 
-
 dotenv.config();
 const port = process.env.SERVER_PORT ? +process.env.SERVER_PORT : 3000;
 

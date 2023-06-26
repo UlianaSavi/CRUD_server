@@ -1,8 +1,8 @@
 import http from 'http';
 import dotenv from 'dotenv';
+import cluster from 'node:cluster';
 import { Router } from './router';
 import { processReq } from './utils/processReq';
-import cluster from 'node:cluster';
 import { availableParallelism as numCPUs } from 'node:os';
 import { HOSTNAME } from './constants';
 
